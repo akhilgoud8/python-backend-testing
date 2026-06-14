@@ -12,7 +12,7 @@ CORS(app)
 # REDIS CONFIG
 # =========================
 redis_client = redis.Redis(
-    host='reddis-6zoavq.serverless.use1.cache.amazonaws.com:6379',
+    host='reddis-6zoavq.serverless.use1.cache.amazonaws.com',
     port=6379,
     ssl=True,
     decode_responses=True,
