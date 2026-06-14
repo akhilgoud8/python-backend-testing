@@ -35,7 +35,7 @@ db_write_config = {
 db_read_config = {
     'host': 'reader.cw16cmy2ko6v.us-east-1.rds.amazonaws.com',
     'user': 'admin',
-    'password': 'Cloud123',
+    'password': 'Cloud1234',
     'database': 'dev'
 }
 
