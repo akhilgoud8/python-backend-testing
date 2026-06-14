@@ -19,7 +19,7 @@ redis_client = redis.Redis(
     socket_timeout=5
 )
 
-CACHE_TTL = 90
+CACHE_TTL = 30
 
 # =========================
 # RDS CONFIG (DEV ONLY)
@@ -184,13 +184,8 @@ def add_user():
         conn.commit()
 
         print("✅ WRITE SUCCESSFUL ON RDS WRITER")
-
-        # Cache invalidation
-        redis_client.delete("users:all")
-        print("🧹 CACHE INVALIDATED → users:all")
-
-        return jsonify({'message': 'User added successfully'}), 201
-
+        print("⏳ REDIS CACHE KEPT UNTIL TTL EXPIRES")
+        return jsonify({'message': 'User added successfully','cache_behavior': 'Cache retained until TTL expiry'}), 201
     except Error as err:
         print("❌ WRITE ERROR:", err)
         return jsonify({'error': str(err)}), 500
@@ -214,12 +209,8 @@ def update_user(user_id):
         conn.commit()
 
         print("✅ UPDATE SUCCESSFUL ON RDS WRITER")
-
-        redis_client.delete("users:all")
-        redis_client.delete(f"user:{user_id}")
-        print("🧹 CACHE INVALIDATED → users:all, user:{user_id}")
-
-        return jsonify({'message': 'User updated successfully'})
+        print("⏳ REDIS CACHE KEPT UNTIL TTL EXPIRES")
+        return jsonify({'message': 'User updated successfully','cache_behavior': 'Cache retained until TTL expiry'})
 
     except Error as err:
         print("❌ UPDATE ERROR:", err)
@@ -240,12 +231,8 @@ def delete_user(user_id):
         conn.commit()
 
         print("✅ DELETE SUCCESSFUL ON RDS WRITER")
-
-        redis_client.delete("users:all")
-        redis_client.delete(f"user:{user_id}")
-        print("🧹 CACHE INVALIDATED → users:all, user:{user_id}")
-
-        return jsonify({'message': 'User deleted successfully'})
+        print("⏳ REDIS CACHE KEPT UNTIL TTL EXPIRES")
+        return jsonify({'message': 'User deleted successfully','cache_behavior': 'Cache retained until TTL expiry'})
 
     except Error as err:
         print("❌ DELETE ERROR:", err)
