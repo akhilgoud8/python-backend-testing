@@ -12,7 +12,7 @@ CORS(app)
 # REDIS CONFIG
 # =========================
 redis_client = redis.Redis(
-    host='reddis-6zoavq.serverless.use1.cache.amazonaws.com',
+    host='reedis-bwqv1y.serverless.use1.cache.amazonaws.com',
     port=6379,
     ssl=True,
     decode_responses=True,
@@ -26,14 +26,14 @@ CACHE_TTL = 30
 # =========================
 
 db_write_config = {
-    'host': 'database-1.cw16cmy2ko6v.us-east-1.rds.amazonaws.com',
+    'host': 'database-2.cqnouq8siy5r.us-east-1.rds.amazonaws.com',
     'user': 'admin',
     'password': 'Cloud1234',
     'database': 'dev'
 }
 
 db_read_config = {
-    'host': 'reader.cw16cmy2ko6v.us-east-1.rds.amazonaws.com',
+    'host': 'reader.cqnouq8siy5r.us-east-1.rds.amazonaws.com',
     'user': 'admin',
     'password': 'Cloud1234',
     'database': 'dev'
